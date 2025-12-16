@@ -29,8 +29,8 @@ sudo apt install -y "${apt_packages[@]}"
 # Clean up
 sudo apt autoremove -y
 
-# Install oh-my-zsh
-curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/oh-my-zsh/install-oh-my-zsh.sh | bash
+# Install oh-my-bash
+curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/oh-my-bash/install-oh-my-bash.sh | bash
 
 # Install nodejs and npm via nvm
 curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/nodejs/install-nodejs.sh | bash
