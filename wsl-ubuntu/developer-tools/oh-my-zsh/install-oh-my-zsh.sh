@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Install oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then

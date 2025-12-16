@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Install Docker engine
 if ! command -v docker &> /dev/null; then
