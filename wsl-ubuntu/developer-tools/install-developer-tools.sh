@@ -1,7 +1,7 @@
-#!/bin/zsh
+#!/bin/bash
 
 # wsl --unregister Ubuntu_Test; wsl --install Ubuntu-24.04 --location . --name Ubuntu_Test
-# cd $HOME; curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/install-developer-tools.sh | zsh
+# cd $HOME; curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/install-developer-tools.sh | bash
 
 apt_packages=(
     snapd
@@ -30,13 +30,13 @@ sudo apt install -y "${apt_packages[@]}"
 sudo apt autoremove -y
 
 # Install oh-my-zsh
-curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/oh-my-zsh/install-oh-my-zsh.sh | zsh
+curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/oh-my-zsh/install-oh-my-zsh.sh | bash
 
 # Install nodejs and npm via nvm
-curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/nodejs/install-nodejs.sh | zsh
+curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/nodejs/install-nodejs.sh | bash
 
 # Install Docker engine
-curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh | zsh
+curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh | bash
 
 
 echo "Developer tools installation completed."
