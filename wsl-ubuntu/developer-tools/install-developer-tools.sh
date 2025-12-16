@@ -38,6 +38,8 @@ curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/
 # Install Docker engine
 curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh | bash
 
+# Source .bashrc to apply changes
+source $HOME/.bashrc
 
 echo "Developer tools installation completed."
 echo "Please restart your terminal..."
