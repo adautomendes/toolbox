@@ -22,6 +22,9 @@ sudo apt update && sudo apt upgrade -y
 # Install apt packages
 sudo apt install -y "${apt_packages[@]}"
 
+# Clean up
+sudo apt autoremove -y
+
 # Install oh-my-zsh
 curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/oh-my-zsh/install-oh-my-zsh.sh | bash
 
