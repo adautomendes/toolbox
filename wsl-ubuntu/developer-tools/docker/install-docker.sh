@@ -25,8 +25,9 @@ if ! command -v docker &> /dev/null; then
     sudo apt-get update
     sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-    # Add current user to docker group
+    sudo groupadd docker
+
     sudo usermod -aG docker $USER
 
-    docker run hello-world
+    newgrp docker
 fi
