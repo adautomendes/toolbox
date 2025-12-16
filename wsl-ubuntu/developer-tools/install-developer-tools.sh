@@ -16,10 +16,14 @@ apt_packages=(
     python3-pip
 )
 
+echo -e "\n\033[1;32m>>> Installing developer tools...\033[0m\n"
+
 # Update/Upgrade packages
 sudo apt update && sudo apt upgrade -y
 
 # Install apt packages
+echo -e "\n\033[1;32m>>> Installing apt packages...\033[0m\n"
+echo -e "\n\033[1;32m>>> Packages to install: ${apt_packages[*]}\033[0m\n"
 sudo apt install -y "${apt_packages[@]}"
 
 # Clean up
