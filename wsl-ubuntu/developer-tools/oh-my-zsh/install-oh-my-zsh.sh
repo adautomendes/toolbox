@@ -5,7 +5,7 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo -e "\n\033[1;32m>>> Installing oh-my-zsh...\033[0m\n"
     sudo apt install -y zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    chsh -s $(which zsh)
+    sudo chsh -s $(which zsh)
 fi
 
 # Install Powerlevel10k theme
