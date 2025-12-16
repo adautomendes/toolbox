@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Install nodejs and npm via nvm
 NVM_VERSION=$(curl -s https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r .tag_name)
 

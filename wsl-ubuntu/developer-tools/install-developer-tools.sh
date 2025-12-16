@@ -1,3 +1,8 @@
+#!/bin/bash
+
+# wsl --unregister Ubuntu_Test; wsl --install Ubuntu-24.04 --location . --name Ubuntu_Test
+# cd $HOME; curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/install-developer-tools.sh | bash
+
 apt_packages=(
     snapd
     curl

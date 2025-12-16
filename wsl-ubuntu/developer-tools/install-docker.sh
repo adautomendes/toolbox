@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Install Docker engine
 if ! command -v docker &> /dev/null; then
     for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
