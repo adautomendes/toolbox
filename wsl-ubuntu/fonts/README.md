@@ -33,8 +33,9 @@ The script downloads and installs the Monaspace fonts, a modern monospace font f
 The Monaspace family includes:
 - Monaspace Neon
 - Monaspace Argon
-- Monaspace Xenon
+- Monaspace Krypton
 - Monaspace Radon
+- Monaspace Xenon
 
 ## Verification
 After installation, verify fonts are available:
