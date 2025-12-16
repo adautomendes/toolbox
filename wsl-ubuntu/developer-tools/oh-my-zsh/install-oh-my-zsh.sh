@@ -19,7 +19,3 @@ if ! grep -q 'ZSH_THEME="powerlevel10k/powerlevel10k"' "$HOME/.zshrc"; then
     echo -e "\n\033[1;32m>>> Configuring .zshrc to use Powerlevel10k theme...\033[0m\n"
     sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' "$HOME/.zshrc"
 fi
-
-# Disable Powerlevel9k configuration wizard
-echo -e "\n\033[1;32m>>> Disabling Powerlevel9k configuration wizard...\033[0m\n"
-echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >> $HOME/.zshrc
