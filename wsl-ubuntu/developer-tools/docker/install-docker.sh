@@ -2,7 +2,7 @@
 
 # Install Docker engine
 if ! command -v docker &> /dev/null; then
-    echo "Installing Docker engine..."
+    echo -e "\n\033[1;32m>>> Installing Docker engine...\033[0m\n"
     for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
         sudo apt-get remove $pkg;
     done
