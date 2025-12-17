@@ -12,6 +12,6 @@ if [ ! -d "$HOME/.oh-my-bash" ]; then
 
     curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh | bash
 
-    # Set oh-my-bash theme to "lambda"
-    sed -i 's/^OSH_THEME=.*/OSH_THEME="lambda"/' "$HOME/.bashrc"
+    # Set oh-my-bash theme to "powerline"
+    sed -i 's/^OSH_THEME=.*/OSH_THEME="powerline"/' "$HOME/.bashrc"
 fi
