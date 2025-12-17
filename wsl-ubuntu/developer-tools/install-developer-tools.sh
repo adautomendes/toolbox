@@ -1,7 +1,22 @@
 #!/bin/bash
 
-# wsl --unregister Ubuntu_Test; wsl --install Ubuntu-24.04 --location . --name Ubuntu_Test
-# cd $HOME; curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/install-developer-tools.sh | bash
+# Parse command line arguments
+INSECURE=''
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --insecure)
+            INSECURE='--insecure'
+            shift
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
+
+echo -e "\n\033[1;32m>>> Provided options: INSECURE=$INSECURE\033[0m\n"
+exit 0
 
 apt_packages=(
     snapd
