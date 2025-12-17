@@ -17,6 +17,6 @@ echo "alias jenkins-run=\"java -jar $HOME/Jenkins/jenkins.war --httpPort=$port\"
 
 # Print success message
 echo -e "\n\033[1;32m>>> Jenkins installation completed!\033[0m\n"
-echo -e "\n\033[1;32m>>> Please restart your terminal...\033[0m\n"
-echo -e "\n\033[1;32m>>> To run Jenkins, use the command: jenkins-run\033[0m\n"
-echo -e "\n\033[1;32m>>> Access Jenkins at: http://localhost:$port\033[0m\n"
+echo -e "\033[1;32m>>> Please restart your terminal...\033[0m\n"
+echo -e "\033[1;32m>>> To run Jenkins, use the command: jenkins-run\033[0m\n"
+echo -e "\033[1;32m>>> Access Jenkins at: http://localhost:$port\033[0m\n"
