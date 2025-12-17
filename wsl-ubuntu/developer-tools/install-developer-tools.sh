@@ -91,7 +91,7 @@ fi
 
 if [ "$INSTALL_DOCKER" = true ]; then
     # Install Docker engine
-    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh | bash -s -- $INSECURE
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh | bash -s
 fi
 
 if [ "$INSTALL_JENKINS" = true ]; then
@@ -100,7 +100,7 @@ if [ "$INSTALL_JENKINS" = true ]; then
     sudo apt install -y openjdk-21-jdk
 
     # Install Jenkins
-    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/install-jenkins.sh | bash -s -- $INSECURE
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/install-jenkins.sh | bash -s
 fi
 
 # Source .bashrc to apply changes
