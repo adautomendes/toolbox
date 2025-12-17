@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Install Docker engine
 if ! command -v docker &> /dev/null; then

@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 INSECURE=''
 INSTALL_OSH=false
 INSTALL_NODEJS=false
 INSTALL_DOCKER=false
+INSTALL_JENKINS=false
 
 parse_command_line_arguments() {
     while [[ $# -gt 0 ]]; do
@@ -24,10 +25,15 @@ parse_command_line_arguments() {
                 INSTALL_DOCKER=true
                 shift
                 ;;
+            --jenkins)
+                INSTALL_JENKINS=true
+                shift
+                ;;
             --all)
                 INSTALL_OSH=true
                 INSTALL_NODEJS=true
                 INSTALL_DOCKER=true
+                INSTALL_JENKINS=true
                 shift
                 ;;
             *)
@@ -41,7 +47,8 @@ parse_command_line_arguments() {
     echo -e "\033[1;32m - INSECURE: $INSECURE\033[0m"
     echo -e "\033[1;32m - INSTALL_OSH: $INSTALL_OSH\033[0m"
     echo -e "\033[1;32m - INSTALL_NODEJS: $INSTALL_NODEJS\033[0m"
-    echo -e "\033[1;32m - INSTALL_DOCKER: $INSTALL_DOCKER\033[0m\n"
+    echo -e "\033[1;32m - INSTALL_DOCKER: $INSTALL_DOCKER\033[0m"
+    echo -e "\033[1;32m - INSTALL_JENKINS: $INSTALL_JENKINS\033[0m\n"
 }
 
 parse_command_line_arguments "$@"
@@ -85,6 +92,15 @@ fi
 if [ "$INSTALL_DOCKER" = true ]; then
     # Install Docker engine
     curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh | bash -s -- $INSECURE
+fi
+
+if [ "$INSTALL_JENKINS" = true ]; then
+    # Temp solution until we have a proper Java installer script
+    echo -e "\n\033[1;32m>>> Installing OpenJDK 21...\033[0m\n"
+    sudo apt install -y openjdk-21-jdk
+
+    # Install Jenkins
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/install-jenkins.sh | bash -s -- $INSECURE
 fi
 
 # Source .bashrc to apply changes
