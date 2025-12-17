@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 INSECURE=''
 INSTALL_OSH=false
@@ -102,9 +102,6 @@ if [ "$INSTALL_JENKINS" = true ]; then
     # Install Jenkins
     curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/install-jenkins.sh | bash -s
 fi
-
-# Source .bashrc to apply changes
-source $HOME/.bashrc
 
 echo "Developer tools installation completed."
 echo "Please restart your terminal..."

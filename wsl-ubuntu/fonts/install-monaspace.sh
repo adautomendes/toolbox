@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Get latest Monaspace version
 MONASPACE_VERSION=$(curl -s https://api.github.com/repos/githubnext/monaspace/releases/latest | jq -r .tag_name)
