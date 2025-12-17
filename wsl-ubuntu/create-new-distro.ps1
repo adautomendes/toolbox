@@ -49,7 +49,7 @@ wsl --terminate $distroName
 
 # --- Step 8: Install Developer Tools ---
 Write-Host "Installing developer tools..." -ForegroundColor Cyan
-wsl -d $distroName -u $linuxUser bash -c "cd $HOME; curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/install-developer-tools.sh | bash"
+wsl -d $distroName -u $linuxUser bash -c "cd $HOME; curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/install-developer-tools.sh | bash -s -- --all"
 
 Write-Host "Success! $distroName has been re-installed and configured." -ForegroundColor Green
 Write-Host "You can now run 'wsl -d $distroName' to login."

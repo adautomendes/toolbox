@@ -1,22 +1,46 @@
 #!/bin/bash
 
-# Parse command line arguments
 INSECURE=''
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        --insecure)
-            INSECURE='--insecure'
-            shift
-            ;;
-        *)
-            echo "Unknown option: $1"
-            exit 1
-            ;;
-    esac
-done
+INSTALL_OSH=false
+INSTALL_NODEJS=false
+INSTALL_DOCKER=false
 
-echo -e "\n\033[1;32m>>> Provided options: INSECURE=$INSECURE\033[0m\n"
-exit 0
+parse_command_line_arguments() {
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --insecure)
+                INSECURE='--insecure'
+                shift
+                ;;
+            --osh)
+                INSTALL_OSH=true
+                shift
+                ;;
+            --nodejs)
+                INSTALL_NODEJS=true
+                shift
+                ;;
+            --docker)
+                INSTALL_DOCKER=true
+                shift
+                ;;
+            --all)
+                INSTALL_OSH=true
+                INSTALL_NODEJS=true
+                INSTALL_DOCKER=true
+                shift
+                ;;
+            *)
+                echo "Unknown option: $1"
+                exit 1
+                ;;
+        esac
+    done
+
+    echo -e "\n\033[1;32m>>> Provided options: $INSECURE\033[0m\n"
+}
+
+parse_command_line_arguments "$@"
 
 apt_packages=(
     snapd
@@ -44,14 +68,20 @@ sudo apt install -y "${apt_packages[@]}"
 # Clean up
 sudo apt autoremove -y
 
-# Install oh-my-bash
-curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/oh-my-bash/install-oh-my-bash.sh | bash
+if [ "$INSTALL_OSH" = true ]; then
+    # Install oh-my-bash
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/oh-my-bash/install-oh-my-bash.sh | bash -s -- $INSECURE
+fi
 
-# Install nodejs and npm via nvm
-curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/nodejs/install-nodejs.sh | bash
+if [ "$INSTALL_NODEJS" = true ]; then
+    # Install nodejs and npm via nvm
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/nodejs/install-nodejs.sh | bash -s -- $INSECURE
+fi
 
-# Install Docker engine
-curl -o- https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh | bash
+if [ "$INSTALL_DOCKER" = true ]; then
+    # Install Docker engine
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh | bash -s -- $INSECURE
+fi
 
 # Source .bashrc to apply changes
 source $HOME/.bashrc
