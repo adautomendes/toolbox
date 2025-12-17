@@ -37,11 +37,11 @@ parse_command_line_arguments() {
         esac
     done
 
-    echo -e "\n\033[1;32m>>> Provided options:\033[0m\n"
-    echo -e "INSECURE: $INSECURE"
-    echo -e "INSTALL_OSH: $INSTALL_OSH"
-    echo -e "INSTALL_NODEJS: $INSTALL_NODEJS"
-    echo -e "INSTALL_DOCKER: $INSTALL_DOCKER\n"
+    echo -e "\n\033[1;32m>>> Provided options:\033[0m"
+    echo -e "\033[1;32m - INSECURE: $INSECURE\033[0m"
+    echo -e "\033[1;32m - INSTALL_OSH: $INSTALL_OSH\033[0m"
+    echo -e "\033[1;32m - INSTALL_NODEJS: $INSTALL_NODEJS\033[0m"
+    echo -e "\033[1;32m - INSTALL_DOCKER: $INSTALL_DOCKER\033[0m\n"
 }
 
 parse_command_line_arguments "$@"
