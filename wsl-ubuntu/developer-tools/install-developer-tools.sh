@@ -2,6 +2,8 @@
 
 INSECURE=''
 INSTALL_OSH=false
+INSTALL_JAVA=false
+INSTALL_PYTHON=false
 INSTALL_NODEJS=false
 INSTALL_DOCKER=false
 INSTALL_JENKINS=false
@@ -15,6 +17,14 @@ parse_command_line_arguments() {
                 ;;
             --osh)
                 INSTALL_OSH=true
+                shift
+                ;;
+            --java)
+                INSTALL_JAVA=true
+                shift
+                ;;
+            --python)
+                INSTALL_PYTHON=true
                 shift
                 ;;
             --nodejs)
@@ -31,6 +41,8 @@ parse_command_line_arguments() {
                 ;;
             --all)
                 INSTALL_OSH=true
+                INSTALL_JAVA=true
+                INSTALL_PYTHON=true
                 INSTALL_NODEJS=true
                 INSTALL_DOCKER=true
                 INSTALL_JENKINS=true
@@ -46,6 +58,8 @@ parse_command_line_arguments() {
     echo -e "\n\033[1;32m>>> Provided options:\033[0m"
     echo -e "\033[1;32m - INSECURE: $INSECURE\033[0m"
     echo -e "\033[1;32m - INSTALL_OSH: $INSTALL_OSH\033[0m"
+    echo -e "\033[1;32m - INSTALL_JAVA: $INSTALL_JAVA\033[0m"
+    echo -e "\033[1;32m - INSTALL_PYTHON: $INSTALL_PYTHON\033[0m"
     echo -e "\033[1;32m - INSTALL_NODEJS: $INSTALL_NODEJS\033[0m"
     echo -e "\033[1;32m - INSTALL_DOCKER: $INSTALL_DOCKER\033[0m"
     echo -e "\033[1;32m - INSTALL_JENKINS: $INSTALL_JENKINS\033[0m\n"
@@ -64,6 +78,7 @@ apt_packages=(
     build-essential
     python3
     python3-pip
+    unzip
 )
 
 echo -e "\n\033[1;32m>>> Installing developer tools...\033[0m\n"
@@ -84,6 +99,16 @@ if [ "$INSTALL_OSH" = true ]; then
     curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/oh-my-bash/install-oh-my-bash.sh | bash -s -- $INSECURE
 fi
 
+if [ "$INSTALL_JAVA" = true ]; then
+    # Install JDK 21, Maven and Gradle
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/java/install-jdk-21.sh | bash
+fi
+
+if [ "$INSTALL_PYTHON" = true ]; then
+    # Install Python tools
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/python/install-virtualenv.sh | bash
+fi
+
 if [ "$INSTALL_NODEJS" = true ]; then
     # Install nodejs and npm via nvm
     curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/nodejs/install-nodejs.sh | bash -s -- $INSECURE
@@ -95,13 +120,11 @@ if [ "$INSTALL_DOCKER" = true ]; then
 fi
 
 if [ "$INSTALL_JENKINS" = true ]; then
-    # Temp solution until we have a proper Java installer script
-    echo -e "\n\033[1;32m>>> Installing OpenJDK 21...\033[0m\n"
-    sudo apt install -y openjdk-21-jdk
-
     # Install Jenkins
     curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/install-jenkins.sh | bash -s
 fi
 
-echo "Developer tools installation completed."
-echo "Please restart your terminal..."
+touch $HOME/.hushlogin
+
+echo -e "\n\033[1;32m>>> Developer tools installation completed!\033[0m\n"
+echo -e "\033[1;32m>>> Please restart your terminal...\033[0m\n"
