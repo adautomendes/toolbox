@@ -1,9 +1,9 @@
 # --- Configuration ---
 # Define the distro name, username, and password. Update it as needed.
-$distroName = "Ubuntu_Test"
-$linuxUser = "test"
-$linuxPass = "test"
-$locationPath = "C:\TEST_WSL\$distroName"
+$distroName = "My_Aweosome_Ubuntu"
+$linuxUser = "user"
+$linuxPass = "user"
+$locationPath = "C:\WSL\$distroName"
 
 # --- Step 1: Clean up existing installation ---
 Write-Host "Checking for existing $distroName installation..." -ForegroundColor Cyan
