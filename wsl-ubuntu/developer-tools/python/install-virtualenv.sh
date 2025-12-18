@@ -15,5 +15,10 @@ if ! command -v pipx &> /dev/null; then
 
     pipx install virtualenv
 
+    mkdir -p $HOME/Python
+
+    virtualenv $HOME/Python/env
+    
+    echo -e "\n\033[1;32m>>> virtualenv created at $HOME/Python/env\033[0m\n"
     echo -e "\n\033[1;32m>>> virtualenv installation completed!\033[0m\n"
 fi
