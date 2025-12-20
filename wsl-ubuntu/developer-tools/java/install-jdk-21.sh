@@ -27,10 +27,10 @@ if ! command -v mvn &> /dev/null; then
 
     tar -xzf $HOME/Java/apache-maven-3.9.12-bin.tar.gz -C $HOME/Java/maven --strip-components=1
 
-    # Append MAVEN_HOME to .bashrc
+    # Append M2_HOME to .bashrc
     echo -e "\n# Maven configuration" >> $HOME/.bashrc
-    echo "export MAVEN_HOME=$HOME/Java/maven" >> $HOME/.bashrc
-    echo "export PATH=\$MAVEN_HOME/bin:\$PATH" >> $HOME/.bashrc
+    echo "export M2_HOME=$HOME/Java/maven" >> $HOME/.bashrc
+    echo "export PATH=\$M2_HOME/bin:\$PATH" >> $HOME/.bashrc
 
     # Print success message
     echo -e "\n\033[1;32m>>> Maven installation completed!\033[0m\n"

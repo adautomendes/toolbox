@@ -282,7 +282,7 @@ Installs a complete Java development environment with OpenJDK, Maven, and Gradle
 **Key Features**:
 - No `sudo` required - installs to `~/Java/`
 - Automatic environment variable configuration in `~/.bashrc`
-- Sets up `JAVA_HOME`, `MAVEN_HOME`, and `GRADLE_HOME`
+- Sets up `JAVA_HOME`, `M2_HOME`, and `GRADLE_HOME`
 - Skips tools that are already installed
 
 **Standalone Usage**:
