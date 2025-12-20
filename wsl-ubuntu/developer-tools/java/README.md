@@ -14,7 +14,7 @@ The script configures environment variables in your `~/.bashrc` and installs all
 
 - Downloads and extracts OpenJDK 21 to `~/Java/jdk21`.
 - Appends `JAVA_HOME` and updates `PATH` in `~/.bashrc`.
-- Installs Maven to `~/Java/maven` if `mvn` is not found, then appends `MAVEN_HOME` and updates `PATH`.
+- Installs Maven to `~/Java/maven` if `mvn` is not found, then appends `M2_HOME` and updates `PATH`.
 - Installs Gradle to `~/Java/gradle` if `gradle` is not found, then appends `GRADLE_HOME` and updates `PATH`.
 - Prompts you to restart your terminal (or `source ~/.bashrc`).
 
@@ -80,8 +80,8 @@ export JAVA_HOME=$HOME/Java/jdk21
 export PATH=$JAVA_HOME/bin:$PATH
 
 # Maven configuration (if Maven was installed)
-export MAVEN_HOME=$HOME/Java/maven
-export PATH=$MAVEN_HOME/bin:$PATH
+export M2_HOME=$HOME/Java/maven
+export PATH=$M2_HOME/bin:$PATH
 
 # Gradle configuration (if Gradle was installed)
 export GRADLE_HOME=$HOME/Java/gradle
