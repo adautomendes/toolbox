@@ -5,10 +5,10 @@ echo -e "\n\033[1;32m>>> Installing JDK 21...\033[0m\n"
 
 mkdir -p $HOME/Java/jdk21
 
-## wget https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_linux-x64_bin.tar.gz -O $HOME/Java/openjdk-21_linux-x64_bin.tar.gz
-mv /mnt/c/Adauto/downloads/openjdk-21.0.2_linux-x64_bin.tar.gz $HOME/Java/openjdk-21_linux-x64_bin.tar.gz
+## wget https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_linux-x64_bin.tar.gz -O $HOME/Java/openjdk-21.0.2_linux-x64_bin.tar.gz
+cp /mnt/c/Adauto/downloads/openjdk-21.0.2_linux-x64_bin.tar.gz $HOME/Java/openjdk-21.0.2_linux-x64_bin.tar.gz
 
-tar -xzf $HOME/Java/openjdk-21_linux-x64_bin.tar.gz -C $HOME/Java/jdk21 --strip-components=1
+tar -xzf $HOME/Java/openjdk-21.0.2_linux-x64_bin.tar.gz -C $HOME/Java/jdk21 --strip-components=1
 
 # Append JAVA_HOME to .bashrc
 echo -e "\n\n# JDK 21 configuration" >> $HOME/.bashrc
@@ -25,7 +25,7 @@ if ! command -v mvn &> /dev/null; then
     mkdir -p $HOME/Java/maven
 
     ## wget https://dlcdn.apache.org/maven/maven-3/3.9.12/binaries/apache-maven-3.9.12-bin.tar.gz -O $HOME/Java/apache-maven-3.9.12-bin.tar.gz
-    mv /mnt/c/Adauto/downloads/apache-maven-3.9.12-bin.tar.gz $HOME/Java/apache-maven-3.9.12-bin.tar.gz
+    cp /mnt/c/Adauto/downloads/apache-maven-3.9.12-bin.tar.gz $HOME/Java/apache-maven-3.9.12-bin.tar.gz
 
     tar -xzf $HOME/Java/apache-maven-3.9.12-bin.tar.gz -C $HOME/Java/maven --strip-components=1
 
