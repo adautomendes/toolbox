@@ -2,7 +2,7 @@
 
 INSECURE=''
 INSTALL_OSH=false
-INSTALL_JAVA=false
+INSTALL_JAVA21=false
 INSTALL_PYTHON=false
 INSTALL_NODEJS=false
 INSTALL_DOCKER=false
@@ -19,8 +19,8 @@ parse_command_line_arguments() {
                 INSTALL_OSH=true
                 shift
                 ;;
-            --java)
-                INSTALL_JAVA=true
+            --java21)
+                INSTALL_JAVA21=true
                 shift
                 ;;
             --python)
@@ -41,7 +41,7 @@ parse_command_line_arguments() {
                 ;;
             --all)
                 INSTALL_OSH=true
-                INSTALL_JAVA=true
+                INSTALL_JAVA21=true
                 INSTALL_PYTHON=true
                 INSTALL_NODEJS=true
                 INSTALL_DOCKER=true
@@ -58,7 +58,7 @@ parse_command_line_arguments() {
     echo -e "\n\033[1;32m>>> Provided options:\033[0m"
     echo -e "\033[1;32m - INSECURE: $INSECURE\033[0m"
     echo -e "\033[1;32m - INSTALL_OSH: $INSTALL_OSH\033[0m"
-    echo -e "\033[1;32m - INSTALL_JAVA: $INSTALL_JAVA\033[0m"
+    echo -e "\033[1;32m - INSTALL_JAVA21: $INSTALL_JAVA21\033[0m"
     echo -e "\033[1;32m - INSTALL_PYTHON: $INSTALL_PYTHON\033[0m"
     echo -e "\033[1;32m - INSTALL_NODEJS: $INSTALL_NODEJS\033[0m"
     echo -e "\033[1;32m - INSTALL_DOCKER: $INSTALL_DOCKER\033[0m"
@@ -84,22 +84,22 @@ apt_packages=(
 echo -e "\n\033[1;32m>>> Installing developer tools...\033[0m\n"
 
 # Update/Upgrade packages
-sudo apt update && sudo apt upgrade -y
+## sudo apt update && sudo apt upgrade -y
 
 # Install apt packages
 echo -e "\n\033[1;32m>>> Installing apt packages...\033[0m\n"
 echo -e "\n\033[1;32m>>> Packages to install: ${apt_packages[*]}\033[0m\n"
-sudo apt install -y "${apt_packages[@]}"
+## sudo apt install -y "${apt_packages[@]}"
 
 # Clean up
-sudo apt autoremove -y
+## sudo apt autoremove -y
 
 if [ "$INSTALL_OSH" = true ]; then
     # Install oh-my-bash
     curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/oh-my-bash/install-oh-my-bash.sh | bash -s -- $INSECURE
 fi
 
-if [ "$INSTALL_JAVA" = true ]; then
+if [ "$INSTALL_JAVA21" = true ]; then
     # Install JDK 21, Maven and Gradle
     curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/java/install-jdk-21.sh | bash
 fi
@@ -122,6 +122,13 @@ fi
 if [ "$INSTALL_JENKINS" = true ]; then
     # Install Jenkins
     curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/install-jenkins.sh | bash -s
+fi
+
+# If Java and Jenkins are installed, configure Maven/Gradle for Jenkins
+if [ "$INSTALL_JAVA21" = true ] && [ "$INSTALL_JENKINS" = true ]; then
+    echo -e "\n\033[1;32m>>> Configuring Maven and Gradle for Jenkins...\033[0m\n"
+
+    echo -e "\n\033[1;32m>>> Maven and Gradle configuration for Jenkins completed!\033[0m\n"
 fi
 
 touch $HOME/.hushlogin
