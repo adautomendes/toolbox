@@ -89,10 +89,10 @@ echo -e "\n\033[1;32m>>> Installing developer tools...\033[0m\n"
 # Install apt packages
 echo -e "\n\033[1;32m>>> Installing apt packages...\033[0m\n"
 echo -e "\n\033[1;32m>>> Packages to install: ${apt_packages[*]}\033[0m\n"
-## sudo apt install -y "${apt_packages[@]}"
+sudo apt install -y "${apt_packages[@]}"
 
 # Clean up
-## sudo apt autoremove -y
+sudo apt autoremove -y
 
 if [ "$INSTALL_OSH" = true ]; then
     # Install oh-my-bash
@@ -127,6 +127,9 @@ fi
 # If Java and Jenkins are installed, configure Maven/Gradle for Jenkins
 if [ "$INSTALL_JAVA21" = true ] && [ "$INSTALL_JENKINS" = true ]; then
     echo -e "\n\033[1;32m>>> Configuring Maven and Gradle for Jenkins...\033[0m\n"
+
+    # Configure Jenkins tools (Maven/Gradle)
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/configure-jenkins-tools.sh | bash
 
     echo -e "\n\033[1;32m>>> Maven and Gradle configuration for Jenkins completed!\033[0m\n"
 fi
