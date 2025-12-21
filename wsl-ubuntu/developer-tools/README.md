@@ -17,7 +17,7 @@ Automate a consistent, batteries-included Linux dev environment with a single co
     - [Always Installed](#always-installed)
     - [Optional (by flag)](#optional-by-flag)
       - [`--osh` (Oh My Bash)](#--osh-oh-my-bash)
-      - [`--java` (Java Development)](#--java-java-development)
+      - [`--java21` (Java Development)](#--java21-java-development)
       - [`--python` (Python Tooling)](#--python-python-tooling)
       - [`--nodejs` (Node.js via NVM)](#--nodejs-nodejs-via-nvm)
       - [`--docker` (Docker Engine)](#--docker-docker-engine)
@@ -74,7 +74,7 @@ Flags can be combined freely. Unknown flags cause the script to exit with an err
 | Flag | Purpose | Summary |
 |---|---|---|
 | `--osh` | Shell UX | Oh My Bash with themes, aliases, completion |
-| `--java` | Java stack | JDK 21 + Maven + Gradle |
+| `--java21` | Java stack | JDK 21 + Maven + Gradle |
 | `--python` | Python tooling | Python tools via `virtualenv` installer |
 | `--nodejs` | Node.js LTS | NVM + latest LTS Node.js + npm/npx |
 | `--docker` | Containers | Docker Engine + CLI (+ Compose if available) |
@@ -99,6 +99,7 @@ High‑level flow of `install-developer-tools.sh`:
 3. Install base packages via `apt install -y`
 4. `sudo apt autoremove -y` to clean unused deps
 5. Conditional installs via remote installers (see map below)
+   - If both Java 21 and Jenkins are selected, Maven and Gradle tools are configured inside Jenkins automatically
 6. Create `~/.hushlogin` to suppress MOTD/login noise
 7. Prompt to restart terminal
 
@@ -120,7 +121,7 @@ snapd curl tree yq jq git wget build-essential python3 python3-pip unzip
 - `~/.bashrc` is updated by the installer
 - More: [wsl-ubuntu/developer-tools/oh-my-bash/README.md](wsl-ubuntu/developer-tools/oh-my-bash/README.md)
 
-#### `--java` (Java Development)
+#### `--java21` (Java Development)
 - JDK 21 (LTS), plus Maven and Gradle
 - Typical homes: `/usr/lib/jvm`, `~/.m2`, `~/.gradle`
 - More: [wsl-ubuntu/developer-tools/java/README.md](wsl-ubuntu/developer-tools/java/README.md)
@@ -153,7 +154,7 @@ snapd curl tree yq jq git wget build-essential python3 python3-pip unzip
 ./install-developer-tools.sh --nodejs --docker --osh
 
 # Full‑stack Java
-./install-developer-tools.sh --java --docker --jenkins --osh
+./install-developer-tools.sh --java21 --docker --jenkins --osh
 
 # Python data science foundation
 ./install-developer-tools.sh --python --docker
@@ -236,6 +237,11 @@ Remote installers fetched via `curl` and piped to `bash`:
    - Invoked with: `bash -s -- $INSECURE`
 - Docker: https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh
 - Jenkins: https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/install-jenkins.sh
+
+Additional conditional step:
+
+- Jenkins tools config: https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/configure-jenkins-tools.sh
+   - Invoked automatically when `--java21` and `--jenkins` are both set to configure Maven/Gradle tools in Jenkins
 
 Behavioral notes:
 - Unknown options cause an immediate exit (`exit 1`)

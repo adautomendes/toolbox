@@ -95,6 +95,7 @@ toolbox/
     │   │
     │   ├── jenkins/                  # Jenkins CI/CD server
     │   │   ├── install-jenkins.sh
+    │   │   ├── configure-jenkins-tools.sh
     │   │   └── README.md
     │   │
     │   ├── nodejs/                   # Node.js via NVM
@@ -305,16 +306,18 @@ gradle -version
 
 **Location**: [wsl-ubuntu/developer-tools/jenkins](wsl-ubuntu/developer-tools/jenkins)
 
-Sets up a local Jenkins instance by downloading the latest Jenkins WAR file.
+Sets up a local Jenkins instance by downloading the latest Jenkins WAR file, with optional tool configuration for Maven and Gradle.
 
 **What It Does**:
 - Downloads latest `jenkins.war` to `~/Jenkins/`
 - Creates `JENKINS_HOME` at `~/Jenkins/home`
 - Adds `jenkins-run` alias to start Jenkins easily
 - Configurable HTTP port (default: 9000)
+- Optional: Configures Maven and Gradle tool definitions in Jenkins
 
 **Prerequisites**:
 - Java Runtime Environment must be installed
+- For tool configuration: Maven at `~/Java/maven` and/or Gradle at `~/Java/gradle`
 
 **Standalone Usage**:
 ```bash
@@ -325,6 +328,10 @@ cd wsl-ubuntu/developer-tools/jenkins
 jenkins-run
 
 # Access at http://localhost:9000
+
+# Optional: Configure Maven/Gradle tools in Jenkins
+./configure-jenkins-tools.sh
+# Then restart Jenkins to load the tool definitions
 ```
 
 **[📖 Full Documentation](wsl-ubuntu/developer-tools/jenkins/README.md)**

@@ -8,8 +8,7 @@ echo -e "\n\033[1;32m>>> Installing Jenkins...\033[0m\n"
 mkdir -p $HOME/Jenkins/home
 
 # Download Jenkins latest war file
-## wget https://get.jenkins.io/war/latest/jenkins.war -O $HOME/Jenkins/jenkins.war
-cp /mnt/c/Adauto/downloads/jenkins.war $HOME/Jenkins/jenkins.war
+wget https://get.jenkins.io/war/latest/jenkins.war -O $HOME/Jenkins/jenkins.war
 
 # Append config to .bashrc
 echo -e "\n# Jenkins configuration" >> $HOME/.bashrc
