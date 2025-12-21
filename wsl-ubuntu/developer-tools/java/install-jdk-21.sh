@@ -43,7 +43,7 @@ if ! command -v gradle &> /dev/null; then
     echo -e "\n\033[1;32m>>> Installing Gradle...\033[0m\n"
 
     ## wget https://services.gradle.org/distributions/gradle-8.7-bin.zip -O $HOME/Java/gradle-8.7-bin.zip
-    mv /mnt/c/Adauto/downloads/gradle-8.7-bin.zip $HOME/Java/gradle-8.7-bin.zip
+    cp /mnt/c/Adauto/downloads/gradle-8.7-bin.zip $HOME/Java/gradle-8.7-bin.zip
 
     unzip -q $HOME/Java/gradle-8.7-bin.zip -d $HOME/Java
 
