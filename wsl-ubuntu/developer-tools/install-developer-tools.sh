@@ -84,7 +84,7 @@ apt_packages=(
 echo -e "\n\033[1;32m>>> Installing developer tools...\033[0m\n"
 
 # Update/Upgrade packages
-## sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt upgrade -y
 
 # Install apt packages
 echo -e "\n\033[1;32m>>> Installing apt packages...\033[0m\n"
