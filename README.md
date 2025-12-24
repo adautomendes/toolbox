@@ -89,6 +89,10 @@ toolbox/
     │   │   ├── install-docker.sh
     │   │   └── README.md
     │   │
+    │   ├── helm/                     # Helm Package Manager
+    │   │   ├── install-helm-cli.sh
+    │   │   └── README.md
+    │   │
     │   ├── java/                     # JDK 21 + Maven + Gradle
     │   │   ├── install-jdk-21.sh
     │   │   └── README.md
@@ -96,6 +100,10 @@ toolbox/
     │   ├── jenkins/                  # Jenkins CI/CD server
     │   │   ├── install-jenkins.sh
     │   │   ├── configure-jenkins-tools.sh
+    │   │   └── README.md
+    │   │
+    │   ├── kubectl/                  # Kubernetes CLI
+    │   │   ├── install-kubectl.sh
     │   │   └── README.md
     │   │
     │   ├── nodejs/                   # Node.js via NVM
@@ -213,10 +221,12 @@ cd wsl-ubuntu/developer-tools
 
 # Options:
 #   --osh       Install Oh My Bash with powerline theme
-#   --java      Install OpenJDK 21, Maven, and Gradle
+#   --java21    Install OpenJDK 21, Maven, and Gradle
 #   --python    Install pipx and virtualenv
 #   --nodejs    Install Node.js LTS via NVM
 #   --docker    Install Docker Engine with Docker Compose
+#   --kubectl   Install Kubernetes CLI (kubectl)
+#   --helm      Install Helm Package Manager
 #   --jenkins   Install Jenkins LTS
 ```
 
@@ -224,10 +234,10 @@ cd wsl-ubuntu/developer-tools
 
 ```bash
 # Install everything
-./install-developer-tools.sh --osh --java --python --nodejs --docker --jenkins
+./install-developer-tools.sh --all
 
 # Install only essential development tools
-./install-developer-tools.sh --java --nodejs --docker
+./install-developer-tools.sh --java21 --nodejs --docker --kubectl --helm
 
 # Install Python and Docker only
 ./install-developer-tools.sh --python --docker
@@ -266,6 +276,64 @@ docker run --rm hello-world
 ```
 
 **[📖 Full Documentation](wsl-ubuntu/developer-tools/docker/README.md)**
+
+---
+
+#### ☸️ Kubernetes CLI (kubectl)
+
+**Location**: [wsl-ubuntu/developer-tools/kubectl](wsl-ubuntu/developer-tools/kubectl)
+
+Installs the latest stable version of `kubectl`, the command-line tool for controlling Kubernetes clusters.
+
+**What It Installs**:
+- Latest stable `kubectl` binary
+
+**Key Features**:
+- Downloads directly from official Kubernetes release repository
+- Installs to `~/kubernetes/` (no sudo required for binary placement)
+- Automatically updates `PATH` in `~/.bashrc`
+- Supports `--insecure` flag for environments with proxy/SSL issues
+
+**Standalone Usage**:
+```bash
+cd wsl-ubuntu/developer-tools/kubectl
+./install-kubectl.sh
+
+# Verify installation
+source ~/.bashrc
+kubectl version --client
+```
+
+**[📖 Full Documentation](wsl-ubuntu/developer-tools/kubectl/README.md)**
+
+---
+
+#### ⚓ Helm Package Manager
+
+**Location**: [wsl-ubuntu/developer-tools/helm](wsl-ubuntu/developer-tools/helm)
+
+Installs the latest release of Helm, the package manager for Kubernetes.
+
+**What It Installs**:
+- Latest `helm` binary
+
+**Key Features**:
+- Fetches latest release tag from GitHub
+- Installs to `~/helm/`
+- Automatically updates `PATH` in `~/.bashrc`
+- Supports `--insecure` flag
+
+**Standalone Usage**:
+```bash
+cd wsl-ubuntu/developer-tools/helm
+./install-helm-cli.sh
+
+# Verify installation
+source ~/.bashrc
+helm version
+```
+
+**[📖 Full Documentation](wsl-ubuntu/developer-tools/helm/README.md)**
 
 ---
 
