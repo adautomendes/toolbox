@@ -6,6 +6,8 @@ INSTALL_JAVA21=false
 INSTALL_PYTHON=false
 INSTALL_NODEJS=false
 INSTALL_DOCKER=false
+INSTALL_KUBECTL=false
+INSTALL_HELM=false
 INSTALL_JENKINS=false
 
 parse_command_line_arguments() {
@@ -35,6 +37,14 @@ parse_command_line_arguments() {
                 INSTALL_DOCKER=true
                 shift
                 ;;
+            --kubectl)
+                INSTALL_KUBECTL=true
+                shift
+                ;;
+            --helm)
+                INSTALL_HELM=true
+                shift
+                ;;
             --jenkins)
                 INSTALL_JENKINS=true
                 shift
@@ -45,6 +55,8 @@ parse_command_line_arguments() {
                 INSTALL_PYTHON=true
                 INSTALL_NODEJS=true
                 INSTALL_DOCKER=true
+                INSTALL_KUBECTL=true
+                INSTALL_HELM=true
                 INSTALL_JENKINS=true
                 shift
                 ;;
@@ -116,12 +128,22 @@ fi
 
 if [ "$INSTALL_DOCKER" = true ]; then
     # Install Docker engine
-    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh | bash -s
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/docker/install-docker.sh | bash
+fi
+
+if [ "$INSTALL_KUBECTL" = true ]; then
+    # Install kubectl
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/kubernetes/install-kubectl.sh | bash -s -- $INSECURE
+fi
+
+if [ "$INSTALL_HELM" = true ]; then
+    # Install Helm
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/kubernetes/install-helm.sh | bash -s -- $INSECURE
 fi
 
 if [ "$INSTALL_JENKINS" = true ]; then
     # Install Jenkins
-    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/install-jenkins.sh | bash -s
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/jenkins/install-jenkins.sh | bash
 fi
 
 # If Java and Jenkins are installed, configure Maven/Gradle for Jenkins

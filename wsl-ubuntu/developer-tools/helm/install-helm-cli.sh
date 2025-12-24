@@ -24,6 +24,8 @@ parse_command_line_arguments "$@"
 # Install nodejs and npm via nvm
 HELM_VERSION=$(curl -s $INSECURE https://api.github.com/repos/helm/helm/releases/latest | jq -r .tag_name)
 
+echo -e "\n\033[1;32m>>> Installing Helm version: $HELM_VERSION\033[0m\n"
+
 mkdir -p $HOME/helm
 
 curl -s $INSECURE -L -o $HOME/helm/helm-${HELM_VERSION}-linux-amd64.tar.gz https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz
