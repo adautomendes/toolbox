@@ -74,6 +74,8 @@ parse_command_line_arguments() {
     echo -e "\033[1;32m - INSTALL_PYTHON: $INSTALL_PYTHON\033[0m"
     echo -e "\033[1;32m - INSTALL_NODEJS: $INSTALL_NODEJS\033[0m"
     echo -e "\033[1;32m - INSTALL_DOCKER: $INSTALL_DOCKER\033[0m"
+    echo -e "\033[1;32m - INSTALL_KUBECTL: $INSTALL_KUBECTL\033[0m"
+    echo -e "\033[1;32m - INSTALL_HELM: $INSTALL_HELM\033[0m"
     echo -e "\033[1;32m - INSTALL_JENKINS: $INSTALL_JENKINS\033[0m\n"
 }
 
