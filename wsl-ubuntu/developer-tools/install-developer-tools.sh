@@ -135,12 +135,12 @@ fi
 
 if [ "$INSTALL_KUBECTL" = true ]; then
     # Install kubectl
-    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/kubernetes/install-kubectl.sh | bash -s -- $INSECURE
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/kubectl/install-kubectl.sh | bash -s -- $INSECURE
 fi
 
 if [ "$INSTALL_HELM" = true ]; then
     # Install Helm
-    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/kubernetes/install-helm.sh | bash -s -- $INSECURE
+    curl -o- $INSECURE https://raw.githubusercontent.com/adautomendes/toolbox/refs/heads/main/wsl-ubuntu/developer-tools/helm/install-helm-cli.sh | bash -s -- $INSECURE
 fi
 
 if [ "$INSTALL_JENKINS" = true ]; then

@@ -25,7 +25,7 @@ echo -e "\n\033[1;32m>>> Installing kubectl...\033[0m\n"
 
 mkdir -p $HOME/kubernetes
 
-curl $INSECURE -LO -o "$HOME/kubernetes/kubectl" "https://dl.k8s.io/release/$(curl $INSECURE -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl $INSECURE -L -o "$HOME/kubernetes/kubectl" "https://dl.k8s.io/release/$(curl $INSECURE -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
 chmod +x $HOME/kubernetes/kubectl
 
