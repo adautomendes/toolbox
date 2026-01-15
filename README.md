@@ -60,7 +60,7 @@ find . -type f -name "*.sh" -exec chmod +x {} \;
 
 # Example: Install complete developer environment on WSL Ubuntu
 cd wsl-ubuntu/developer-tools
-./install-developer-tools.sh --osh --java --python --nodejs --docker
+./install-developer-tools.sh --osh --java21 --python --nodejs --docker
 
 # Example: Create a new WSL Ubuntu distro (Windows PowerShell as Admin)
 cd wsl-ubuntu/create-new-distro
@@ -585,7 +585,7 @@ cd toolbox\wsl-ubuntu\create-new-distro
 ```bash
 # 2. Inside your new WSL distro, install development tools
 cd /mnt/c/path/to/toolbox/wsl-ubuntu/developer-tools
-./install-developer-tools.sh --osh --java --nodejs --docker --python
+./install-developer-tools.sh --osh --java21 --nodejs --docker --python
 ```
 
 ### Scenario 2: Docker-Only Installation
