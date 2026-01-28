@@ -86,6 +86,7 @@ apt_packages=(
     curl
     tree
     jq
+    yq
     git
     wget
     build-essential
@@ -97,15 +98,15 @@ apt_packages=(
 echo -e "\n\033[1;32m>>> Installing developer tools...\033[0m\n"
 
 # Update/Upgrade packages
-sudo apt update
+sudo apt-get update
 
 # Install apt packages
 echo -e "\n\033[1;32m>>> Installing apt packages...\033[0m\n"
 echo -e "\n\033[1;32m>>> Packages to install: ${apt_packages[*]}\033[0m\n"
-sudo apt install -y "${apt_packages[@]}"
+sudo apt-get install -y "${apt_packages[@]}"
 
 # Clean up
-sudo apt autoremove -y
+sudo apt-get autoremove -y
 
 if [ "$INSTALL_OSH" = true ]; then
     # Install oh-my-bash
