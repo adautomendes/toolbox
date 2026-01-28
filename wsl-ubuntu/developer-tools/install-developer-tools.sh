@@ -85,7 +85,6 @@ apt_packages=(
     snapd
     curl
     tree
-    yq
     jq
     git
     wget
@@ -95,10 +94,10 @@ apt_packages=(
     unzip
 )
 
-# echo -e "\n\033[1;32m>>> Installing developer tools...\033[0m\n"
+echo -e "\n\033[1;32m>>> Installing developer tools...\033[0m\n"
 
 # Update/Upgrade packages
-# sudo apt update
+sudo apt update
 
 # Install apt packages
 echo -e "\n\033[1;32m>>> Installing apt packages...\033[0m\n"
