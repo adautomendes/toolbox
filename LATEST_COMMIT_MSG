@@ -1,1 +1,1 @@
-Fix apt upgrade
+Fix Maven installation to fetch latest version and update Gradle installation to use a variable for version.
