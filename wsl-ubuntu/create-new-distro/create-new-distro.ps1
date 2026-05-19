@@ -1,6 +1,6 @@
 # --- Configuration ---
 # Define the distro name, username, and password. Update it as needed.
-$distroName = "My_Aweosome_Ubuntu"
+$distroName = "Ubuntu-26.04"
 $linuxUser = "user"
 $linuxPass = "user"
 $locationPath = "C:\WSL\$distroName"
@@ -19,10 +19,11 @@ if (-not (Test-Path -Path $locationPath)) {
     New-Item -ItemType Directory -Path $locationPath | Out-Null
 }
 # --no-launch prevents the terminal window from popping up (requires newer WSL versions)
-wsl --install Ubuntu --location $locationPath --name $distroName --no-launch
+wsl --install Ubuntu-26.04 --location $locationPath --name $distroName --no-launch
 
 # Wait for registration to finalize in the background
 Write-Host "Waiting for initialization..."
+wsl --shutdown
 Start-Sleep -Seconds 5
 
 # --- Step 3: Create User via Root Backdoor ---

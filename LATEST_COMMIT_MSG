@@ -1,1 +1,1 @@
-Fix Maven installation to fetch latest version and update Gradle installation to use a variable for version.
+Update create-new-distro.ps1 to use Ubuntu-26.04 and add wsl --shutdown after installation.
