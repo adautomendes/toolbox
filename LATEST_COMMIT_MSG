@@ -1,1 +1,1 @@
-Update create-new-distro.ps1 to use Ubuntu-26.04 and add wsl --shutdown after installation.
+Add systemd=true on wsl.conf to enable systemd on wsl2

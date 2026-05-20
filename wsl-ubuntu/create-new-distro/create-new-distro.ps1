@@ -42,7 +42,7 @@ wsl -d $distroName -u root usermod -aG sudo $linuxUser
 
 # --- Step 6: Set Default User ---
 # This ensures that when you type 'wsl', you log in as your user, not root
-$config = "[user]`ndefault=$linuxUser"
+$config = "[user]`ndefault=$linuxUser`n`n[boot]`nsystemd=true"
 wsl -d $distroName -u root bash -c "echo '$config' > /etc/wsl.conf"
 
 # --- Step 7: Restart to Apply Changes ---
