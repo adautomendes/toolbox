@@ -1,1 +1,1 @@
-Add systemd=true on wsl.conf to enable systemd on wsl2
+Update scripts modifiers and added a new one to install Nerd Fonts

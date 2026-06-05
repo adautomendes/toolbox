@@ -9,7 +9,7 @@ echo "Installing Monaspace version: $MONASPACE_VERSION"
 DEST_DIR="$HOME/.local/share/fonts"
 
 # Create a temporary source directory
-SOURCE_DIR="$HOME/monaspace_temp"
+SOURCE_DIR="$HOME/fonts_temp"
 mkdir -p "$SOURCE_DIR"
 cd "$SOURCE_DIR" || exit 1
 
