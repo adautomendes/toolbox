@@ -27,7 +27,7 @@ This script provides a streamlined way to create fresh WSL Ubuntu installations 
 Edit the configuration variables at the top of the script before running:
 
 ```powershell
-$distroName = "My_Aweosome_Ubuntu"  # Name of the WSL distribution
+$distroName = "Ubuntu-26.04"         # Name of the WSL distribution
 $linuxUser = "user"                  # Linux username to create
 $linuxPass = "user"                  # Password for the Linux user
 $locationPath = "C:\WSL\$distroName" # Installation directory
@@ -37,8 +37,8 @@ $locationPath = "C:\WSL\$distroName" # Installation directory
 
 | Parameter | Description | Default Value | Notes |
 |-----------|-------------|---------------|-------|
-| `$distroName` | WSL distribution name | `My_Aweosome_Ubuntu` | Must be unique; underscores recommended |
-| `$linuxUser` | Linux username | `user` | Will be created with home directory |
+| `$distroName` | WSL distribution name | `Ubuntu-26.04` | Must be unique; used as the `--name` and `--location` key |
+| `$linuxUser` | Linux username | `user` | Will be created with home directory at `/home/$linuxUser` |
 | `$linuxPass` | User password | `user` | Used for sudo operations |
 | `$locationPath` | Installation path | `C:\WSL\$distroName` | Directory will be created if missing |
 
@@ -62,10 +62,10 @@ After installation completes:
 
 ```powershell
 # Launch the distro
-wsl -d My_Aweosome_Ubuntu
+wsl -d Ubuntu-26.04
 
 # Or set it as default
-wsl --set-default My_Aweosome_Ubuntu
+wsl --set-default Ubuntu-26.04
 wsl
 ```
 
@@ -98,14 +98,14 @@ The script executes the following steps in sequence:
 - Adds user to `sudo` group
 - Enables passwordless (or password-protected) sudo operations
 
-### Step 6: Configure Default User
-- Creates `/etc/wsl.conf` with user configuration
-- Ensures the custom user logs in by default (not root)
-- Improves security and user experience
+### Step 6: Configure Default User and systemd
+- Creates `/etc/wsl.conf` with both `[user]` and `[boot]` sections
+- Sets `default=<linuxUser>` so the custom user logs in by default (not root)
+- Enables `systemd=true` so systemd-based services (e.g., Docker) work correctly
 
 ### Step 7: Apply Configuration
-- Terminates the distro to reload settings
-- Forces WSL to read the new `/etc/wsl.conf`
+- Runs `wsl --terminate $distroName` to reload `/etc/wsl.conf`
+- Systemd and the default user take effect on the next launch
 
 ### Step 8: Install Developer Tools
 - Downloads and executes the developer tools installation script
@@ -181,8 +181,8 @@ wsl --update
 wsl --list --verbose
 
 # Try manual termination and restart
-wsl --terminate My_Aweosome_Ubuntu
-wsl -d My_Aweosome_Ubuntu
+wsl --terminate Ubuntu-26.04
+wsl -d Ubuntu-26.04
 ```
 
 ### Password Not Working

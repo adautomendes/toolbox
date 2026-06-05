@@ -2,8 +2,8 @@
 
 This folder provides a developer-friendly script to install and configure:
 
-- OpenJDK 21 (21.0.2)
-- Apache Maven (3.9.12) — only if not already installed
+- OpenJDK 21 (21.0.2) — fixed version
+- Apache Maven (latest stable, fetched dynamically from `dlcdn.apache.org`) — only if not already installed
 - Gradle (8.7) — only if not already installed
 
 The script configures environment variables in your `~/.bashrc` and installs all tools under `~/Java/` to avoid requiring `sudo`.
@@ -59,13 +59,13 @@ source ~/.bashrc
 ## Installed Versions and Paths
 
 - OpenJDK: 21.0.2 → `~/Java/jdk21`
-- Maven: 3.9.12 → `~/Java/maven`
+- Maven: latest stable (resolved at install time from `dlcdn.apache.org`) → `~/Java/maven`
 - Gradle: 8.7 → `~/Java/gradle`
 
 Downloads are performed from official sources:
 
 - OpenJDK: `https://download.java.net/.../openjdk-21.0.2_linux-x64_bin.tar.gz`
-- Maven: `https://dlcdn.apache.org/maven/maven-3/3.9.12/.../apache-maven-3.9.12-bin.tar.gz`
+- Maven: `https://dlcdn.apache.org/maven/maven-3/<latest>/binaries/apache-maven-<latest>-bin.tar.gz`
 - Gradle: `https://services.gradle.org/distributions/gradle-8.7-bin.zip`
 
 ---
@@ -100,7 +100,7 @@ mvn -version
 gradle -v
 ```
 
-Expected outputs should show JDK 21.0.2, Maven 3.9.12, and Gradle 8.7.
+Expected outputs: JDK 21.0.2, Maven (latest stable at install time), Gradle 8.7.
 
 ---
 
@@ -133,8 +133,9 @@ After edits, re-run the script and `source ~/.bashrc`.
 rm -rf ~/Java/jdk21
 rm -rf ~/Java/maven
 rm -rf ~/Java/gradle
-rm -f  ~/Java/openjdk-21_linux-x64_bin.tar.gz
-rm -f  ~/Java/apache-maven-3.9.12-bin.tar.gz
+# Any leftover archives (filenames vary based on version resolved at install time):
+rm -f  ~/Java/openjdk-21.0.2_linux-x64_bin.tar.gz
+rm -f  ~/Java/apache-maven-*-bin.tar.gz
 rm -f  ~/Java/gradle-8.7-bin.zip
 ```
 

@@ -255,22 +255,28 @@ The following packages are installed automatically on every execution, regardles
 **Complete Java development environment with build tools**
 
 - **Components Installed**:
-  - OpenJDK 21 (LTS release)
-  - Apache Maven (latest stable)
-  - Gradle (latest stable)
+  - OpenJDK 21.0.2
+  - Apache Maven (latest stable, resolved dynamically at install time)
+  - Gradle 8.7
 
-- **Installation Paths**:
-  - JDK: `/usr/lib/jvm/java-21-openjdk-amd64/`
-  - Maven: `~/.m2/` (local repository)
-  - Gradle: `~/.gradle/` (cache and config)
+- **Installation Paths** (no `sudo` required — all under `~/Java/`):
+  - JDK: `~/Java/jdk21`
+  - Maven: `~/Java/maven`
+  - Gradle: `~/Java/gradle`
 
-- **Environment Variables**:
+- **Environment Variables** (appended to `~/.bashrc`):
   ```bash
-  JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
-  PATH=$JAVA_HOME/bin:$PATH
+  export JAVA_HOME=$HOME/Java/jdk21
+  export PATH=$JAVA_HOME/bin:$PATH
+
+  export M2_HOME=$HOME/Java/maven
+  export PATH=$M2_HOME/bin:$PATH
+
+  export GRADLE_HOME=$HOME/Java/gradle
+  export PATH=$GRADLE_HOME/bin:$PATH
   ```
 
-- **Integration**: When combined with `--jenkins`, Maven and Gradle are automatically configured in Jenkins
+- **Integration**: When combined with `--jenkins`, Maven and Gradle are automatically configured as named tools in Jenkins (`maven3` and `gradle8`)
 
 **Related Documentation**: [java/README.md](java/README.md)
 
@@ -362,16 +368,16 @@ The following packages are installed automatically on every execution, regardles
 **Kubernetes command-line interface**
 
 - **Components Installed**:
-  - kubectl (latest stable)
+  - kubectl (latest stable, downloaded from `dl.k8s.io`)
 
-- **Configuration**:
-  - Installed to `/usr/local/bin/kubectl`
-  - Requires `~/.kube/config` for cluster access
+- **Installation Path**: `~/kubernetes/kubectl` (no `sudo` required)
+- **PATH**: `export PATH=$PATH:$HOME/kubernetes` appended to `~/.bashrc`
+- **Requires**: `~/.kube/config` for cluster access
 
 - **Verification**:
   ```bash
+  source ~/.bashrc
   kubectl version --client
-  kubectl cluster-info
   ```
 
 **Related Documentation**: [kubectl/README.md](kubectl/README.md)
@@ -381,20 +387,15 @@ The following packages are installed automatically on every execution, regardles
 **Kubernetes package manager**
 
 - **Components Installed**:
-  - Helm CLI (latest stable)
+  - Helm CLI (latest stable, resolved from GitHub API)
 
-- **Installation Path**: `/usr/local/bin/helm`
+- **Installation Path**: `~/helm/helm` (no `sudo` required)
+- **PATH**: `export PATH=$PATH:$HOME/helm` appended to `~/.bashrc`
 
-- **Usage Example**:
+- **Verification**:
   ```bash
-  # Add a chart repository
-  helm repo add stable https://charts.helm.sh/stable
-  
-  # Search for charts
-  helm search repo nginx
-  
-  # Install a chart
-  helm install my-release stable/nginx
+  source ~/.bashrc
+  helm version
   ```
 
 **Related Documentation**: [helm/README.md](helm/README.md)
@@ -404,40 +405,24 @@ The following packages are installed automatically on every execution, regardles
 **Open-source automation server for CI/CD**
 
 - **Components Installed**:
-  - Jenkins LTS (Long-Term Support)
-  - Java 11+ (dependency, auto-installed if missing)
+  - Latest Jenkins WAR downloaded to `~/Jenkins/jenkins.war`
 
-- **Configuration**:
-  - Service: `jenkins`
-  - Port: `8080`
-  - Home Directory: `/var/lib/jenkins`
-  - Initial Admin Password: `/var/lib/jenkins/secrets/initialAdminPassword`
+- **Configuration** (appended to `~/.bashrc`):
+  - `JENKINS_HOME=$HOME/Jenkins/home`
+  - `jenkins-run` alias: starts Jenkins with the port chosen at install time (default: `9000`)
 
-- **Service Management**:
+- **Prerequisites**: Java must be installed and on `PATH` (install with `--java21` or separately)
+
+- **Starting Jenkins**:
   ```bash
-  # Start Jenkins
-  sudo systemctl start jenkins
-  
-  # Enable auto-start on boot
-  sudo systemctl enable jenkins
-  
-  # Check status
-  sudo systemctl status jenkins
-  
-  # View logs
-  sudo journalctl -u jenkins -f
+  # After restarting your terminal:
+  jenkins-run
+  # Access Jenkins at http://localhost:9000
   ```
 
-- **First-Time Setup**:
-  ```bash
-  # Retrieve initial admin password
-  sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-  
-  # Access web UI
-  # http://localhost:8080
-  ```
+- **First-time setup**: the initial admin password is printed to the console on first run. Jenkins data persists under `~/Jenkins/home/`.
 
-- **Maven/Gradle Integration**: When installed with `--java21`, Maven and Gradle are automatically configured as Global Tools in Jenkins
+- **Maven/Gradle Integration**: When installed together with `--java21`, Maven (`maven3`) and Gradle (`gradle8`) are automatically written as named tool definitions in Jenkins
 
 **Related Documentation**: [jenkins/README.md](jenkins/README.md)
 
@@ -493,19 +478,19 @@ nvm list
 # Verify Java
 java -version
 javac -version
-# Expected: openjdk version "21.x.x"
+# Expected: openjdk version "21.0.2"
 
 # Verify Maven
 mvn --version
-# Expected: Apache Maven 3.x.x
+# Expected: Apache Maven 3.x.x (latest stable at install time)
 
 # Verify Gradle
 gradle --version
-# Expected: Gradle 8.x
+# Expected: Gradle 8.7
 
 # Check JAVA_HOME
 echo $JAVA_HOME
-# Expected: /usr/lib/jvm/java-21-openjdk-amd64
+# Expected: /home/<user>/Java/jdk21
 ```
 
 #### Docker (if `--docker` was used)
@@ -543,16 +528,14 @@ helm version
 #### Jenkins (if `--jenkins` was used)
 
 ```bash
-# Check Jenkins service status
-sudo systemctl status jenkins
-# Expected: active (running)
+# Reload shell to pick up the alias and JENKINS_HOME
+source ~/.bashrc
 
-# Get initial admin password
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-# Copy this password for web UI setup
+# Start Jenkins (default port 9000)
+jenkins-run
 
-# Access Jenkins Web UI
-# Open browser: http://localhost:8080
+# Access Jenkins Web UI (the initial admin password is printed to the console on first run)
+# Open browser: http://localhost:9000
 ```
 
 ### Environment Configuration
@@ -1089,7 +1072,7 @@ A: Currently, the script installs Java 21 LTS. You can modify the installer or i
 A: Use NVM: `nvm install 18`, `nvm use 18`, `nvm list`
 
 **Q: Where is Jenkins data stored?**  
-A: All Jenkins data is in `/var/lib/jenkins`, including jobs, plugins, and configuration.
+A: All Jenkins data is in `~/Jenkins/home`, including jobs, plugins, and configuration.
 
 ### Troubleshooting Questions
 
